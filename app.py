@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
-GENAI_API_KEY = os.getenv("GENAI_API_KEY")
+GENAI_API_KEY = st.secrets["google"]["GENAI_API_KEY"]
 
 # Configure Google AI API Key
 if not GENAI_API_KEY:
