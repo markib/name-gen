@@ -124,10 +124,32 @@ def main():
     name_length = st.selectbox("Select Name Length", ["Short", "Medium", "Long"])
 
     # Generate prompt
-    prompt = f"Generate 20 unique Newar (Newa) baby names for a {gender} child from {country}, born in {birth_month} {birth_year}. "
-    prompt += "Each name should have deep roots in Newari culture, traditions, and language. Provide meanings that reflect Newar heritage, spirituality, history, nature, astrology, and science. "
-    prompt += "Include names inspired by celestial bodies, zodiac signs, planetary influences, and scientific discoveries relevant to Newar culture. "
-    prompt += "Format the output as 'Name - Meaning'. Include a mix of historical, traditional, astrological, and modern names. "
+# Generate prompt
+    prompt = f"""Generate 20 unique baby names for a {gender} child from {country}, born in {birth_month} {birth_year}. Follow these guidelines:
+
+    1. Names should reflect the cultural heritage, traditions, and language of {country}.
+    2. Provide meanings that showcase the country's heritage, spirituality, history, nature, and if applicable, local scientific achievements.
+    3. Include a diverse mix of:
+    a) Traditional names with cultural significance
+    b) Names inspired by local celestial beliefs, zodiac signs, or astrological concepts
+    c) Names related to important festivals, rituals, or ceremonies in {country}
+    d) Nature-inspired names reflecting the country's landscape or wildlife
+    e) Names derived from local literature, mythology, or historical figures
+    f) Modern names that blend traditional elements with contemporary concepts
+
+    4. Ensure the names are authentic to {country}'s culture and appropriate for a child born in {birth_year}.
+    5. Format each entry as 'Name - Meaning', providing a brief explanation of the name's cultural or linguistic significance.
+    6. For names with complex pronunciations, include a simple pronunciation guide in parentheses.
+    7. Aim for a balance between unique and familiar names within the culture.
+
+    {f"The names should start with the letter {st.session_state.starting_letter}." if st.session_state.starting_letter != "None" else ""}
+
+    {f"The names should be {name_length.lower()}-length names." if name_length else ""}
+
+    {f"Include a name inspired by combining the parents' names: {combined_name}." if father_name and mother_name else ""}
+
+    Ensure all names are respectful and culturally appropriate."""
+
 
     # Modify prompt based on name length
     if name_length == "Short":
