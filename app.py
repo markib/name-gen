@@ -66,8 +66,6 @@ def main():
         "Argentina",
         "Nigeria",
         "Indonesia",
-        "Pakistan",
-        "Bangladesh",
         "Saudi Arabia",
         "Turkey",
         "Iran",
@@ -124,7 +122,6 @@ def main():
     name_length = st.selectbox("Select Name Length", ["Short", "Medium", "Long"])
 
     # Generate prompt
-# Generate prompt
     prompt = f"""Generate 20 unique baby names for a {gender} child from {country}, born in {birth_month} {birth_year}. Follow these guidelines:
 
     1. Names should reflect the cultural heritage, traditions, and language of {country}.
@@ -146,23 +143,9 @@ def main():
 
     {f"The names should be {name_length.lower()}-length names." if name_length else ""}
 
-    {f"Include a name inspired by combining the parents' names: {combined_name}." if father_name and mother_name else ""}
-
     Ensure all names are respectful and culturally appropriate."""
 
-
-    # Modify prompt based on name length
-    if name_length == "Short":
-        prompt += "The names should be short (4-6 letters). "
-    elif name_length == "Medium":
-        prompt += "The names should be medium-length (7-9 letters). "
-    else:
-        prompt += "The names should be long (10+ letters). "
-
-    # Add starting letter if selected
-    if st.session_state.starting_letter != "None":
-        prompt += f" The names should start with the letter {st.session_state.starting_letter}."
-
+    # Add combined name suggestion if both parent names are provided
     if father_name and mother_name:
         combined_name = combine_names(father_name, mother_name)
         prompt += f" Include a name inspired by combining the parents' names: {combined_name}."
